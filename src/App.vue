@@ -1,8 +1,16 @@
 <script setup>
 import Card from './components/Card.vue';
 import Header from './components/Header.vue';
-</script>
+import { onMounted } from "vue";
+import { stockStore } from "./stores/stockStore";
 
+const stockStoreService = stockStore();
+onMounted(async () => {
+  await stockStoreService.loadData('AAPL');
+  console.log('loaded Data:', stockStoreService.data);
+});
+
+</script>
 <template>
   <Header />
   <main>Hallo</main>

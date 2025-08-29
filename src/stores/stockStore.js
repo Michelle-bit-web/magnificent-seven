@@ -1,18 +1,27 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
-export const useSheetStore = defineStore("sheet", {
+export const api = axios.create({
+    baseURL: "https://sheetdb.io/api/v1/paghb9x9lijim"
+});
+
+function buildSheetUrl(sheetName) {
+    return `?sheet=$${sheetName}`;
+}
+
+export const stockStore = defineStore("sheet", {
     state: () => ({
         data: [],
         loading: false,
-        error: null,
+        error: null
     }),
     actions: {
-        async loadData() {
+        async loadData(sheetName) {
             this.loading = true;
             try {
-                const res = await axios.get("https://sheetdb.io/api/v1/paghb9x9lijim?sheet=$GOOG");
+                const res = await api.get(buildSheetUrl(sheetName));
                 this.data = res.data;
+                console.log(res.data, res);
             } catch (err) {
                 this.error = err;
             } finally {
