@@ -1,9 +1,14 @@
 <script setup>
-import Card from './components/Card.vue';
 import Header from './components/Header.vue';
 import { onMounted } from "vue";
 import { stockStore } from "./stores/stockStore";
 import logo from './assets/images/ms-logo.png'
+import RevBreakdown from "./components/revenue/RevBreakdown.vue";
+import RevLastYears from "./components/revenue/RevLastYears.vue";
+import CompanyBar from "./components/CompanyBar.vue";
+import GrossMargin from "./components/kpi/GrossMargin.vue";
+import NetIncome from "./components/kpi/NetIncome.vue";
+import RevGrowth from "./components/kpi/RevGrowth.vue";
 
 const stockStoreService = stockStore();
 onMounted(async () => {
@@ -15,8 +20,17 @@ onMounted(async () => {
 <template>
   <Header />
   <main>
-    Hallo
-    <Card />
+    <CompanyBar class="col-span-full"/>
+    <div class="grid grid-cols-2 gap-4 col-span-full">
+      <RevLastYears />
+      <RevBreakdown />
+    </div>
+    <div class="grid grid-cols-3 gap-4 col-span-full">
+      <NetIncome />
+      <GrossMargin />
+      <RevGrowth />
+    </div>
+
     <img :src="logo" alt="Logo of Magnificent Seven">
   </main>
 
@@ -26,15 +40,16 @@ onMounted(async () => {
 #app {
   width: 100%;
   max-width: 1440px;
-  height: 100dvh;
+  min-height: 100dvh;
 }
 
 main {
-  height: 100dvh;
+  height: auto;
   width: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
+  gap: 24px;
 
   img {
     position: absolute;

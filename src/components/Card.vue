@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <h2>Card template</h2>
+    <h2>company card</h2>
   </div>
 </template>
 
@@ -12,8 +12,8 @@ export default {
 
 <style  scoped>
 .card {
-  width: 714px;
-  height: 352px;
+  width: 100px;
+  height: 100px;
   gap: 20px;
   border-radius: 16px;
   padding: 20px 32px;
