@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <h2>{{ company }}</h2>
-    <p>Revenue Q1 2023: {{ revenue["1 Aug 24"] }}</p>
+    <p>Quarter: {{ revenue["1 Aug 24"] }}</p>
   </div>
 </template>
 
@@ -14,6 +14,10 @@ defineProps({
 
 <style  scoped>
 .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100px;
   height: 100px;
   gap: 20px;

@@ -13,7 +13,57 @@ function buildSheetUrl(sheetName) {
 export const stockStore = defineStore("sheet", {
     state: () => ({
         data: {},
-        companies: ["AAPL", "AMZN", "GOOG", "META", "MSFT", "NVDA", "TSLA"],
+        companies: [
+            {
+                company: "AAPL",
+                name: "Apple",
+                revRow: 7,
+                netIncomeRow: 34,
+                marginRow: 21
+            },
+            {
+                company: "AMZN",
+                name: "Amazon",
+                revRow: 7,
+                netIncomeRow: 39,
+                marginRow: 13
+            },
+            {
+                company: "GOOG",
+                name: "Alphabet",
+                revRow: 3,
+                netIncomeRow: 47,
+                marginRow: 13
+            },
+            {
+                company: "META",
+                name: "Meta",
+                revRow: 3,
+                netIncomeRow: 25,
+                marginRow: 9
+            },
+            {
+                company: "MSFT",
+                name: "Microsoft",
+                revRow: 7,
+                netIncomeRow: 30,
+                marginRow: 14
+            },
+            {
+                company: "NVDA",
+                name: "Nvidia",
+                revRow: 3,
+                netIncomeRow: 28,
+                marginRow: 10
+            },
+            {
+                company: "TSLA",
+                name: "Tesla",
+                revRow: 13,
+                netIncomeRow: 46,
+                marginRow: 27
+            }
+        ],
         loading: false,
         error: null
     }),
@@ -21,9 +71,10 @@ export const stockStore = defineStore("sheet", {
         async loadData() {
             this.loading = true;
             try {
-                for (const company of this.companies) {
-                    const res = await api.get(buildSheetUrl(company));
-                    this.data[company] = this.formatData(toRaw(res.data));
+                for (const companyData of this.companies) {
+                    const res = await api.get(buildSheetUrl(companyData.company));
+                    this.data[companyData.name] = this.formatData(toRaw(res.data));
+                    console.log(toRaw(res.data));
                 }
             } catch (err) {
                 this.error = err;
@@ -34,11 +85,13 @@ export const stockStore = defineStore("sheet", {
 
         formatData(data) {
             const obj = {
+                quarter: {},
                 revenue: {},
                 grossMargin: {},
                 netIncome: {}
             };
 
+            obj.quarter = data[1];
             obj.revenue = data[7];
             obj.grossMargin = data[21];
             obj.netIncome = data[34];
