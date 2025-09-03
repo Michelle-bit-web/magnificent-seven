@@ -1,16 +1,21 @@
 <template>
   <section class="company-bar">
     <h2>Bar</h2>
-    <Card />
-    <Card />
-    <Card />
-    <Card />
+    <Card
+        v-for="company in Object.keys(stockStoreService.data)"
+        :key="company"
+        :company="company"
+        :revenue="stockStoreService.data[company].revenue"
+    />
+
   </section>
 </template>
 
 <script setup>
 import Card from './Card.vue';
+import { stockStore } from "./../stores/stockStore";
 
+const stockStoreService = stockStore();
 </script>
 
 <style scoped>

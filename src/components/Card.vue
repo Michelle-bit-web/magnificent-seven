@@ -1,13 +1,15 @@
 <template>
   <div class="card">
-    <h2>company card</h2>
+    <h2>{{ company }}</h2>
+    <p>Revenue Q1 2023: {{ revenue["1 Aug 24"] }}</p>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Card'
-}
+<script setup>
+defineProps({
+  company: String,
+  revenue: Object
+});
 </script>
 
 <style  scoped>

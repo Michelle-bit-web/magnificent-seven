@@ -1,7 +1,5 @@
 <script setup>
 import Header from './components/Header.vue';
-import { onMounted } from "vue";
-import { stockStore } from "./stores/stockStore";
 import logo from './assets/images/ms-logo.png'
 import RevBreakdown from "./components/revenue/RevBreakdown.vue";
 import RevLastYears from "./components/revenue/RevLastYears.vue";
@@ -9,13 +7,14 @@ import CompanyBar from "./components/CompanyBar.vue";
 import GrossMargin from "./components/kpi/GrossMargin.vue";
 import NetIncome from "./components/kpi/NetIncome.vue";
 import RevGrowth from "./components/kpi/RevGrowth.vue";
+import {onMounted, reactive, toRaw} from "vue";
+import { stockStore } from "./stores/stockStore";
 
 const stockStoreService = stockStore();
-onMounted(async () => {
-  await stockStoreService.loadData('AAPL');
-  console.log('loaded Data:', stockStoreService.data);
-});
 
+onMounted(async () => {
+  await stockStoreService.loadData();
+});
 </script>
 <template>
   <Header />
