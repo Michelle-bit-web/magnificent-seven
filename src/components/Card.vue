@@ -1,7 +1,9 @@
 <template>
   <div class="card">
     <h2>{{ company }}</h2>
-    <p>Quarter: {{ revenue["1 Aug 24"] }}</p>
+    <div v-for="(value, quarter) in revenue" :key="quarter">
+      <p>{{ quarter }}: {{ value }}</p>
+    </div>
   </div>
 </template>
 
