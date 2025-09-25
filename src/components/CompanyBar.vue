@@ -5,7 +5,7 @@
         v-for="company in Object.keys(stockStoreService.data)"
         :key="company"
         :company="company"
-        :revenue="stockStoreService.data[company.name]"
+        :revenue="stockStoreService.data[company].revenue"
     />
 
   </section>

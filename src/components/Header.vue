@@ -26,14 +26,14 @@ export default {
     gap: 16px;
     padding: 24px 0;
     position: relative;
+  }
 
-    img {
-      position: fixed;
-      top: -10px;
-      right: 0;
-      width: 180px;
-      height: auto;
-    }
+  img {
+    position: fixed;
+    top: -10px;
+    right: 0;
+    width: 180px;
+    height: auto;
   }
 
   h1 {
