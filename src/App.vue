@@ -1,6 +1,5 @@
 <script setup>
 import Header from './components/Header.vue';
-import logo from './assets/images/ms-logo.png'
 import RevBreakdown from "./components/revenue/RevBreakdown.vue";
 import RevLastYears from "./components/revenue/RevLastYears.vue";
 import CompanyBar from "./components/CompanyBar.vue";
@@ -29,8 +28,6 @@ onMounted(async () => {
       <GrossMargin />
       <RevGrowth />
     </div>
-
-    <img :src="logo" alt="Logo of Magnificent Seven">
   </main>
 
 </template>
@@ -47,16 +44,6 @@ main {
   width: 100%;
   display: flex;
   flex-direction: column;
-  position: relative;
   gap: 24px;
-
-  img {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    opacity: 0.2;
-    width: 50%;
-    height: auto;
-  }
 }
 </style>

@@ -2,22 +2,38 @@
   <header>
     <div class="header-flag"></div>
     <h1>The Magnificent Seven Companies</h1>
+    <img :src="logo" alt="Logo of Magnificent Seven">
   </header>
 </template>
 
 <script>
-
+import logo from "../assets/images/ms-logo.png";
 export default {
   name: 'Header',
+  data() {
+    return {
+      logo, 
+    };
+  },
 }
 </script>
 
 <style scoped>
+
   header {
     display: flex;
     align-items: center;
     gap: 16px;
     padding: 24px 0;
+    position: relative;
+
+    img {
+      position: fixed;
+      top: -10px;
+      right: 0;
+      width: 180px;
+      height: auto;
+    }
   }
 
   h1 {

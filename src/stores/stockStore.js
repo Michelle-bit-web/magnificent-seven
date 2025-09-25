@@ -10,6 +10,37 @@ function buildSheetUrl(sheetName) {
     return `?sheet=$${sheetName}`;
 }
 
+function normalizeQuarterKey(key) {
+  // Variante 1: Q1-24 oder Q1-2022
+  let match = key.match(/(Q[1-4])[-_]?(\d{2,4})$/i);
+  if (match) {
+    const quarter = match[1].toUpperCase();
+    let year = match[2];
+
+    if (year.length === 2) {
+      year = parseInt(year, 10);
+      year = year < 50 ? 2000 + year : 1900 + year;
+    }
+    return `${year} ${quarter}`;
+  }
+
+  // Variante 2: 22Q3 oder 2022Q3
+  match = key.match(/^(\d{2,4})[-_]?Q([1-4])$/i);
+  if (match) {
+    let year = match[1];
+    const quarter = `Q${match[2]}`;
+
+    if (year.length === 2) {
+      year = parseInt(year, 10);
+      year = year < 50 ? 2000 + year : 1900 + year;
+    }
+    return `${year} ${quarter}`;
+  }
+
+  // fallback
+  return key;
+}
+
 export const stockStore = defineStore("sheet", {
     state: () => ({
         data: {},
@@ -101,7 +132,8 @@ export const stockStore = defineStore("sheet", {
             };
             obj.name = company;
             Object.keys(quarterMap).forEach((key) => {
-                const quarter = quarterMap[key];
+                const rawQuarter = quarterMap[key];
+                const quarter = normalizeQuarterKey(rawQuarter);
                 obj.revenue[quarter] = rev[key];
                 obj.grossMargin[quarter] = marg[key];
                 obj.netIncome[quarter] = income[key];
